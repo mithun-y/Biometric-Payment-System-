@@ -2,6 +2,7 @@ package com.personal.app.service;
 import com.personal.app.model.User;
 import com.personal.app.repository.UserRepository;
 import com.personal.app.utils.EncryptionUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Random;
@@ -10,6 +11,12 @@ import java.util.Random;
 public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    @Autowired
+    private EncryptionUtil aesUtil;
+
+    @Autowired
+    private KeyProvider keyProvider;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -29,15 +36,13 @@ public class UserService {
             throw new RuntimeException("Email already registered!");
         }
 
-        // Generate AES key
-        var key = EncryptionUtil.generateKey();
-        byte[] encryptedFingerprint = EncryptionUtil.encrypt(fingerprintImage, key);
+
+        byte[] encryptedFingerprint = aesUtil.encrypt(fingerprintImage, keyProvider.getMasterKey());
 
         User user = new User();
         user.setFullName(fullName);
         user.setEmail(email);
         user.setFingerprintImage(encryptedFingerprint); // store encrypted JPEG
-        user.setFingerprintKey(EncryptionUtil.encodeKey(key)); // store AES key (Base64)
         user.setPinHash(passwordEncoder.encode(pin));
         user.setAccountNumber(generateAccountNumber());
         user.setBalance(initialBalance != null ? initialBalance : 0.0);
@@ -47,7 +52,6 @@ public class UserService {
 
     // Optional: decrypt fingerprint
     public byte[] decryptFingerprint(User user) throws Exception {
-        var key = EncryptionUtil.decodeKey(user.getFingerprintKey());
-        return EncryptionUtil.decrypt(user.getFingerprintImage(), key);
+        return EncryptionUtil.decrypt(user.getFingerprintImage(), keyProvider.getMasterKey());
     }
 }

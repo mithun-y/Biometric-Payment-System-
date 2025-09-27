@@ -17,8 +17,6 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
-    private String fingerprintKey; // store AES key (Base64) for decryption
-
     @Lob
     private byte[] fingerprintImage; // store encrypted JPEG
 
