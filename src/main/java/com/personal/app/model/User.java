@@ -1,13 +1,15 @@
 package com.personal.app.model;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
+@Data
 @Entity
 @Table(name = "users")
-@Data
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,14 +20,17 @@ public class User {
     private String email;
 
     @Lob
-    private byte[] fingerprintImage; // store encrypted JPEG
+    private byte[] fingerprint; // store encrypted JPEG
 
     private String pinHash;
 
     @Column(unique = true, nullable = false)
     private String accountNumber;
 
-    private Double balance = 0.0;
+    // mapping to bank account
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private BankAccount bankAccount;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdTime = LocalDateTime.now();
+
 }

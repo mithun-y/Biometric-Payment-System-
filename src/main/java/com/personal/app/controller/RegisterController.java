@@ -1,18 +1,18 @@
 package com.personal.app.controller;
 
 import com.personal.app.model.User;
-import com.personal.app.service.UserService;
+import com.personal.app.service.RegisterService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/users")
-public class UserController {
-    private final UserService userService;
+public class RegisterController {
+    private final RegisterService registerService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public RegisterController(RegisterService userService) {
+        this.registerService = userService;
     }
 
     @GetMapping("/hello")
@@ -29,7 +29,7 @@ public class UserController {
             @RequestParam(required = false) Double initialBalance) throws Exception {
 
         byte[] imageBytes = fingerprintImage.getBytes();
-        User user = userService.registerUser(fullName, email, imageBytes, pin, initialBalance);
+        User user = registerService.registerUser(fullName, email, imageBytes, pin, initialBalance);
         return ResponseEntity.ok(user);
     }
 }
