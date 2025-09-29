@@ -4,7 +4,7 @@ import com.personal.app.model.BankAccount;
 import com.personal.app.model.User;
 import com.personal.app.repository.UserRepository;
 import com.personal.app.utils.EncryptionUtil;
-import com.personal.app.utils.RegisterResponse;
+import com.personal.app.dto.RegisterResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -20,11 +20,11 @@ public class TransactionController {
     @PostMapping("/pay")
     public ResponseEntity<?> makePayment(
             @RequestParam("pin") String pin,
-            @RequestParam("fingerprint") MultipartFile fingerprintFile,
+            @RequestParam("fingerprint") MultipartFile fingerprint,
             @RequestParam("amount") Double amount) {
 
         try {
-            String result = transactionService.makePayment(pin, fingerprintFile, amount);
+            String result = transactionService.makePayment(pin, fingerprint, amount);
             return ResponseEntity.ok(result);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -33,3 +33,4 @@ public class TransactionController {
         }
     }
 }
+

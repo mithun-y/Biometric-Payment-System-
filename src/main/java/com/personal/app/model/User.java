@@ -28,7 +28,7 @@ public class User {
     private String accountNumber;
 
     // mapping to bank account
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
     private BankAccount bankAccount;
 
     private LocalDateTime createdTime = LocalDateTime.now();

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 public interface TokenRepository extends JpaRepository<Token, Long> {
-    Optional<Token> findByToken(String token);
+    Optional<Token> findByAccountNumber(String accountNumber);
 
     @Modifying
     @Transactional

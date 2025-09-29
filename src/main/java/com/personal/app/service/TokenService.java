@@ -29,21 +29,24 @@ public class TokenService {
         return tokenValue;
     }
 
-    public boolean validateAndUseToken(String tokenValue, String accountNumber) {
-        Optional<Token> optionalToken = tokenRepository.findByToken(tokenValue);
+    public Boolean validateAndUseToken(String accountNumber) {
+        try {
+            Optional<Token> optionalToken = tokenRepository.findByAccountNumber(accountNumber);
 
-        if (optionalToken.isEmpty()) return false;
+            if (optionalToken.isEmpty()) return false;
 
-        Token token = optionalToken.get();
+            Token token = optionalToken.orElseThrow(() -> new RuntimeException("Token not found"));
 
-        if (!token.getAccountNumber().equals(accountNumber)) return false;
-        if (token.getUsed()) return false;
-        if (token.getExpiryTime().isBefore(LocalDateTime.now())) return false;
+            if (token.getUsed()) return false;
+            if (token.getExpiryTime().isBefore(LocalDateTime.now())) return false;
 
-        // mark as used
-        token.setUsed(true);
-        tokenRepository.save(token);
+            // mark as used
+            token.setUsed(true);
+            tokenRepository.save(token);
 
-        return true;
+            return true;
+        } catch (RuntimeException e) {
+            return false;
+        }
     }
 }
