@@ -48,6 +48,7 @@ Other: Maven for dependency management, REST APIs
 
 
 How It Works
+
 User Registration: Users register with fingerprint, email, and PIN. Fingerprints are AES-encrypted; PINs are hashed. Account numbers are auto-generated.
 Authentication: Users authenticate using fingerprint + PIN. Source AFIS verifies fingerprints.
 Transaction Authorization: Users request a One-Time Transaction Token (OTTT).
