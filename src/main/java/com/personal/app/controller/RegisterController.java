@@ -2,6 +2,8 @@ package com.personal.app.controller;
 
 import com.personal.app.service.RegisterService;
 import com.personal.app.dto.RegisterResponse;
+import jakarta.persistence.Access;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;

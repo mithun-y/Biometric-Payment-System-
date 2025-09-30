@@ -19,6 +19,9 @@ public class RegisterService {
     private EncryptionUtil aesUtil;
 
     @Autowired
+    private WelcomeMailService welcomeMailService;
+
+    @Autowired
     private BankService bankService;
 
     @Autowired
@@ -58,6 +61,8 @@ public class RegisterService {
             User value1=userRepository.save(user);
             // delegate bank account creation to BankService
             BankAccount value2=bankService.createBankAccount(accountNumber,initialBalance);
+
+            welcomeMailService.sendWelcomeEmail(email,fullName,accountNumber,initialBalance);
 
             return new RegisterResponse(value1,value2);
         } catch (Exception e) {

@@ -17,6 +17,9 @@ public class BankService {
     @Autowired
     private TokenService tokenService;
 
+    @Autowired
+    private TransactionMailService transactionMailService;
+
 
     public BankAccount createBankAccount(String accountNumber, Double initialBalance) {
         BankAccount account = new BankAccount();
@@ -57,6 +60,10 @@ public class BankService {
             // Deduct money
             matchedUser.setBalance(matchedUser.getBalance() - amount);
             bankAccountRepository.save(matchedUser);
+
+
+            //mail service
+
 
             return true;
         } catch (RuntimeException e) {
