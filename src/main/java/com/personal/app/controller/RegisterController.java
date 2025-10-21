@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
+@CrossOrigin
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/user")
 public class RegisterController {
     private final RegisterService registerService;
 
@@ -36,7 +37,8 @@ public class RegisterController {
             RegisterResponse res = registerService.registerUser(fullName, email, imageBytes, pin, initialBalance);
             return ResponseEntity.status(HttpStatus.CREATED).body(res);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            RegisterResponse res=null;
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
         }
     }
 }

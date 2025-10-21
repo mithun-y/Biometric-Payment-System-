@@ -37,7 +37,6 @@
         </div>
 
         <div class="body">
-            <p class="greeting">Hello <span th:text="${name}">Customer</span>,</p>
 
             <p class="lead">
                 A <span class="important">Biometric Transaction</span> was made on your account.
@@ -53,7 +52,7 @@
 
                     <tr>
                         <th>Date &amp; Time</th>
-                        <td th:text="${dateTime}">2025-09-30 15:34:00</td>
+                        <td th:text="${dateTime}"></td>
                     </tr>
 
                     <tr>
@@ -63,27 +62,30 @@
 
                     <tr>
                         <th>Amount</th>
-                        <td th:text="${amount}">₹1,000.00</td>
-                    </tr>
-
-                    <tr>
-                        <th>Remaining Balance</th>
-                        <td th:text="${balance}">₹15,200.00</td>
+                        <td th:text="${amount}"></td>
                     </tr>
 
                     <tr>
                         <th>Account</th>
-                        <td th:text="${maskedAccount}">XXXX-XXXX-1234</td>
+                        <td th:text="${maskedAccount}"></td>
                     </tr>
 
                     <tr>
-                        <th>Device Location</th>
-                        <td th:text="${deviceInfo}">ATM - Mumbai Branch (TERM-09)</td>
+                        <th>Device Id</th>
+                        <td th:text="${deviceInfo}"></td>
                     </tr>
 
                     <tr>
-                        <th>Status</th>
-                        <td th:text="${status}">Completed</td>
+                        <th>Location</th>
+                        <td th:text="${locationInfo}">Location</td>
+                    </tr>
+
+                    <tr>
+                        <th>Accounting</th>
+                        <td th:text="${status}"
+                            th:style="'color:' + (${status} == 'SUCCESS' ? 'green' : (${status} == 'FAILED' ? 'red' : 'black'))">
+                            Completed
+                        </td>
                     </tr>
                 </table>
             </div>

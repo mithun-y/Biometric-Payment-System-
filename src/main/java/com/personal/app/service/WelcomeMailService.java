@@ -32,7 +32,7 @@ public class WelcomeMailService {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
         helper.setTo(to);
-        helper.setSubject("Welcome to Fingerprint Payment System 🎉");
+        helper.setSubject("Welcome to Bio-Pay Bank 🎉");
         helper.setText(htmlContent, true); // true => HTML
 
         mailSender.send(mimeMessage);

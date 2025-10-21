@@ -4,7 +4,6 @@ import com.personal.app.model.BankAccount;
 import com.personal.app.repository.BankAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
@@ -13,6 +12,7 @@ public class BankService {
 
     @Autowired
     private BankAccountRepository bankAccountRepository;
+
 
     @Autowired
     private TokenService tokenService;
