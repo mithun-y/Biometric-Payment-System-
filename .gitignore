@@ -1,0 +1,43 @@
+# ===== BACKEND (Spring Boot) =====
+/biometric-payment-system/target/
+/biometric-payment-system/.mvn/
+!.mvn/wrapper/maven-wrapper.jar
+/biometric-payment-system/.idea/
+/biometric-payment-system/.classpath
+/biometric-payment-system/.project
+/biometric-payment-system/.settings/
+/biometric-payment-system/*.iml
+
+# Maven
+log/
+logs/
+*.log
+*.class
+*.jar
+*.war
+*.ear
+
+# ===== FRONTEND (React) =====
+/Frontend/bio-pay/node_modules/
+/Frontend/bio-pay/.env.local
+/Frontend/bio-pay/.env.development.local
+/Frontend/bio-pay/.env.test.local
+/Frontend/bio-pay/.env.production.local
+/Frontend/bio-pay/build/
+/Frontend/bio-pay/dist/
+
+# ===== GENERAL =====
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+.env
+*.tmp
+*.bak
+
+# ===== OS Files =====
+# macOS
+**/.DS_Store
+# Windows
+**/Thumbs.db
